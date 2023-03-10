@@ -1,0 +1,405 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #555;
+}
+
+#europabon-network {
+    height: 700px;
+  }
+
+  .shapes small {
+    margin-right:10px
+  }
+  
+  .shapes .img-shape {
+    width: 30px;
+    height: 30px;
+  } 
+
+  .sidebar-brand-icon img {
+    width: 40px;
+    height: 40px;
+  } 
+  
+  .rectangle{
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .rectangle-small{
+    width: 20px;
+    height: 20px;
+  }
+  
+  .circle{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  
+  .color-green{
+    background: green;
+  }
+  
+  .color-orange{
+    background: orange;
+  }
+  
+  .color-red{
+    background: red;
+  }
+  
+  .color-blue{
+    background: blue;
+  }
+  
+  .color-yellow{
+    background: yellow;
+  }
+  
+  .color-purple{
+    background: purple;
+  }
+  
+  .color-grey{
+    background: #eaeaea;
+  }
+  
+  .color-white{
+    background: #fff;
+  }
+  
+  .color-grey-activity{
+    background: #999;
+  }
+  
+  .color-black{
+    background: #111;
+  }
+  
+  div.vis-tooltip{
+    white-space: normal !important;
+    border: 1px solid #dfdfdf !important;
+    padding: 40px !important;
+    background-color: #ffffff !important;
+    width: 500px !important;
+    word-break: break-word !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    position: fixed !important;
+  }
+  
+  .bg-gradient-custom {
+    background-image: linear-gradient(15deg, #027bb6 0%, #00a396 130%)
+  }
+  
+  
+  
+  /* loading bar */
+  
+  #loadingBar {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    opacity: 1;
+  }
+  /* #wrapper {
+    position: relative;
+    width: 2000px;
+    height: 1000px;
+  } */
+  
+  #text {
+    position: absolute;
+    top: 8px;
+    right: 60px;
+    width: 30px;
+    height: 50px;
+    margin: auto auto auto auto;
+    font-size: 22px;
+    color: #000000;
+  }
+  
+  div.outerBorder {
+    position: relative;
+    height: 44px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  #border {
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    width: 90%;
+    height: 23px;
+    margin: auto auto auto auto;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  #bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: 23px;
+    margin: auto auto auto auto;
+    border-radius: 11px;
+    background: linear-gradient(15deg, #027bb6 0%, #00a396 50%);
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  
+  /* Progress bar */
+  
+  .progress-container{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 15px 0 15px 0;
+  }
+  
+  .progress {
+    display: flex;
+    height: 1rem;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+  }
+  
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #007bff;
+    transition: width 0.6s ease
+  }
+  
+  .bg-green {
+    background: #00dc7f!important;
+    border: 1px solid #00dc7f!important;
+    color: #fff
+  }
+  
+  .bg-red {
+    background: #E74C3C!important;
+    border: 1px solid #E74C3C!important;
+    color: #fff
+  }
+  
+  
+  /* Highcharts */
+  
+  
+  .highcharts-figure,
+  .highcharts-data-table table {
+    min-width: 200px;
+    max-width: 800px;
+    margin: 1em auto;
+  }
+  
+  .highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  .highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+  }
+  
+  .highcharts-data-table td,
+  .highcharts-data-table th,
+  .highcharts-data-table caption {
+    padding: 0.5em;
+  }
+  
+  .highcharts-data-table thead tr,
+  .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+  }
+  
+  .highcharts-data-table tr:hover {
+    background: #f1f7ff;
+  }
+  
+  /* #search-node-div {
+    position: fixed;
+    top: 0px;
+  }
+   */
+
+  
+  .navbar-search i {
+    top: 10px;
+    position: relative;
+    pointer-events: none;
+    color: #a6a6a6;
+    z-index: 1;
+  } 
+
+  .topbar .navbar-search input {
+    font-size: 16px;   
+}
+
+#search-node-input{
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+  .typeahead .dropdown-item{
+    padding: 15px !important;
+    font-size: 15px !important;
+  }
+  
+  #info-box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1
+  }
+  
+  #legend {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    border-left: 1px solid #eaeaea;
+    background: rgba(255,255,255,0.9);
+  }
+  
+  .alert {
+    border: 1px solid #eaeaea;
+    border-radius: 0.1875rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+    position: relative;
+    color: #131313;
+    background-color: rgba(255,255,255,.9);
+  }
+  
+  .alert.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+  }
+  
+  .card-title {
+    color: rgb(51, 51, 51);
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+  
+  .card-body {
+    padding-top: 0.25rem;
+  }
+  
+  .sidebar .nav i {
+    margin-right: 17px;
+  }
+  
+  .sidebar .nav li.stats >a{
+    color: #fff;
+    pointer-events: none;
+    cursor: default;
+  }
+  
+  .sidebar .nav li.stats i {
+    color: #fff;
+  }
+  
+  .sidebar .nav li.stats:hover:not(.active)>a {
+    background: none
+  }
+  
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+  .table tr:first-child td{
+    border-top: none;
+  }
+
+  .groups {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  @media only screen and (max-width: 720px) {
+    #search-node-input {
+      width: 13rem;
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    .dropdown-menu>li>a {
+        word-wrap: break-word;
+        white-space: normal;
+    }
+    
+    .dropdown-menu{
+        max-width: 500px;
+    }
+  }
+
+.card{
+    border-radius: 0;
+}
+
+  /* ****************************************************
+
+CYTOSCAPE
+
+/* **************************************************** */
+
+.popper-div {
+    border: 1px solid #eaeaea;
+    background: #fff;
+    z-index: 9999;
+    padding: 40px;
+    pointer-events: none;
+    white-space: normal;
+    width: 500px;
+    word-break: break-word;
+  }
+  
+  #spinner {
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+  }
