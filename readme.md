@@ -2,7 +2,7 @@
 
 Fully responsive web app to analyze the network of EuropaBON by using [Cytoscape JS](https://js.cytoscape.org/)
 
-![screens](../screens/screens.png)
+![screens](./screens/screens.png)
 
 ## Source Data
 
