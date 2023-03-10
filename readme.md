@@ -21,5 +21,5 @@ Data is used from the [EuropaBON members portal](https://europabon.org/members)
 
 ## Demo
 
-See a live [Demo](https://europabon.org/network-analysis/src/index.html) for details
+See [Demo](https://europabon.org/members/network-analysis/src/index.html)
 
