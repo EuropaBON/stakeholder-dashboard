@@ -23,7 +23,7 @@ Cytoscape rank the nodes in the collection using the [Page Rank algorithm](https
 
 Data is automatically provided by the [EuropaBON members portal](https://europabon.org/members) from a REST API.
 
-`https://europabon.org/members/network-analysis/src/api/nodes`
+`https://europabon.org/members/network-analysis/api/nodes`
 
 
 ## Built With
