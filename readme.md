@@ -2,8 +2,6 @@
 
 Fully responsive web app to visualize the network of EuropaBON by using [Cytoscape JS](https://js.cytoscape.org/)
 
-[Live demo](https://europabon.org/members/network-analysis/src/index.html)
-
 ![screens](./screens/screens.png)
 
 ## Centrality
@@ -22,9 +20,6 @@ Cytoscape rank the nodes in the collection using the [Page Rank algorithm](https
 ## Source Data
 
 Data is automatically provided by the [EuropaBON members portal](https://europabon.org/members) from a REST API.
-
-`https://europabon.org/members/network-analysis/api/nodes`
-
 
 ## Built With
 
