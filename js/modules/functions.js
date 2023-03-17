@@ -6,10 +6,37 @@ export const cy = cytoscape({ container: document.getElementById('europabon-netw
             groups = [10000,10001,10002,10003,10004,10005],
             TOTAL_EVENTS = '13',
             NO_DATA = 'N.A.',
-            scatter_data_degree = [{data: []},{data: []},{data: []},{data: []},{data: []},{data: []}],
-            scatter_data_eigen = [{data: []},{data: []},{data: []},{data: []},{data: []},{data: []}],
-            bplot_data_degree = [{data: []},{data: []},{data: []},{data: []},{data: []},{data: []}],
-            bplot_data_eigen = [{data: []},{data: []},{data: []},{data: []},{data: []},{data: []}];
+            scatter_data_degree = [],
+            scatter_data_eigen = [],
+            bplot_data_degree = [],
+            bplot_data_eigen = [];
+
+let group_series = [
+    {
+        name: "Academia",
+        color: 'rgba(0, 128, 2, 1)'
+    },
+    {
+        name: "Non-Governmental Organization",
+        color: 'rgba(255, 165, 0, 1)'
+    },
+    {
+        name: "Governmental Organization",
+        color: 'rgba(255, 0, 0, 1)'
+    },
+    {
+        name: "Private Industry",
+        color: 'rgba(0, 4, 255, 1)'
+    },
+    {
+        name: "Citizen Science",
+        color: 'rgba(255, 255, 0, 1)'
+    },
+    {
+        name: "Other",
+        color: 'rgba(128, 1, 128, 1)'
+    }
+];
 
 
 
@@ -46,7 +73,7 @@ export const getPercentile = function (data, percentile) {
     else {
         result = data[Math.floor(index)];
     }
-    return result;
+    return Number(result.toFixed(3));
 }
   
 // because .sort() doesn't sort numbers correctly
@@ -61,7 +88,7 @@ export const getBoxValues = function (data) {
     boxValues[0][1] = getPercentile(data, 25);
     boxValues[0][2] = getPercentile(data, 50);
     boxValues[0][3] = getPercentile(data, 75);
-    boxValues[0][4] = Math.max(...data);
+    boxValues[0][4] = Number(Math.max(...data).toFixed(3));
     return boxValues;
 }
 
@@ -104,7 +131,7 @@ export const degreeCentrality = function (id) {
 
 // calculate page rank (=Eigenvector centrality)
 export const pageRank = function (id) {
-    return cy.elements().pageRank().rank(`#${id}`).toFixed(5);
+    return Number(cy.elements().pageRank().rank(`#${id}`)).toFixed(5);
 }
 
 // Object degree Centrality 
@@ -146,98 +173,93 @@ export const toggleGroups = function (className) {
 }
 
 
+
 // populate chart data
 export const chartData = function (data){
 
-    let i = 0, degree, eigen;
-    $.each(data, (index, {id, occupation, events}) => {
+    function regression(arrEvents, arrCentrality) {
+        let r, sy, sx, b, a, meanX, meanY;
+    
+        r = jStat.corrcoeff(arrCentrality, arrEvents);
+        sy = jStat.stdev(arrEvents);
+        sx = jStat.stdev(arrCentrality);
+        meanY = jStat(arrEvents).mean();
+        meanX = jStat(arrCentrality).mean();
+        b = r * (sy / sx);
+        a = meanY - meanX * b;
+        //Set up a line
+        let y1, y2, x1, x2;
+        x1 = jStat.min(arrCentrality);
+        x2 = jStat.max(arrCentrality);
+        y1 = a + b * x1;
+        y2 = a + b * x2;
+        return {
+          line: [
+            [Number(x1.toFixed(3)), Number(y1.toFixed(3))],
+            [Number(x2.toFixed(3)), Number(y2.toFixed(3))]
+          ],
+          r
+        };
+      }
 
-        if (occupation){
-            degree = degreeCentrality(id);
-            eigen = pageRank(id)*10;
-        }
-        
-        switch (occupation) {
-            case 'Academia':
-                scatter_data_degree[0].data.push( { x: degree, y: Number(events.total) } ); 
-                scatter_data_eigen[0].data.push( { x: eigen, y: Number(events.total) } );
-                bplot_data_degree[0].data.push( degree ); 
-                bplot_data_eigen[0].data.push( eigen );
-                do {
-                    i++;
-                    scatter_data_degree[0]['name'] = occupation;
-                    scatter_data_eigen[0]['name'] = occupation;
-                    bplot_data_degree[0]['name'] = occupation;
-                    bplot_data_eigen[0]['name'] = occupation;
-                } while (i < 1);
-                break;
-            case 'Non-Governmental Organization':
-                scatter_data_degree[1].data.push( { x: degree, y: Number(events.total) } ); 
-                scatter_data_eigen[1].data.push( { x: eigen, y: Number(events.total) } );
-                bplot_data_degree[1].data.push( degree ); 
-                bplot_data_eigen[1].data.push( eigen );
-                do {
-                    i++;
-                    scatter_data_degree[1]['name'] = occupation;
-                    scatter_data_eigen[1]['name'] = occupation;
-                    bplot_data_degree[1]['name'] = occupation;
-                    bplot_data_eigen[1]['name'] = occupation;
-                } while (i < 1);
-                break;
-            case 'Governmental Organization':
-                scatter_data_degree[2].data.push( { x: degree, y: Number(events.total) } ); 
-                scatter_data_eigen[2].data.push( { x: eigen, y: Number(events.total) } );
-                bplot_data_degree[2].data.push( degree ); 
-                bplot_data_eigen[2].data.push( eigen );
-                do {
-                    i++;
-                    scatter_data_degree[2]['name'] = occupation;
-                    scatter_data_eigen[2]['name'] = occupation;
-                    bplot_data_degree[2]['name'] = occupation;
-                    bplot_data_eigen[2]['name'] = occupation;
-                } while (i < 1);
-                break;
-            case 'Private Industry':
-                scatter_data_degree[3].data.push( { x: degree, y: Number(events.total) } ); 
-                scatter_data_eigen[3].data.push( { x: eigen, y: Number(events.total) } );
-                bplot_data_degree[3].data.push( degree ); 
-                bplot_data_eigen[3].data.push( eigen );
-                do {
-                    i++;
-                    scatter_data_degree[3]['name'] = occupation;
-                    scatter_data_eigen[3]['name'] = occupation;
-                    bplot_data_degree[3]['name'] = occupation;
-                    bplot_data_eigen[3]['name'] = occupation;
-                } while (i < 1);
-                break;
-            case 'Citizen Science':
-                scatter_data_degree[4].data.push( { x: degree, y: Number(events.total) } ); 
-                scatter_data_eigen[4].data.push( { x: eigen, y: Number(events.total) } );
-                bplot_data_degree[4].data.push( degree ); 
-                bplot_data_eigen[4].data.push( eigen );
-                do {
-                    i++;
-                    scatter_data_degree[4]['name'] = occupation;
-                    scatter_data_eigen[4]['name'] = occupation;
-                    bplot_data_degree[4]['name'] = occupation;
-                    bplot_data_eigen[4]['name'] = occupation;
-                } while (i < 1);
-                break;
-            case 'Other':
-                scatter_data_degree[5].data.push( { x: degree, y: Number(events.total) } ); 
-                scatter_data_eigen[5].data.push( { x: eigen, y: Number(events.total) } );
-                bplot_data_degree[5].data.push( degree ); 
-                bplot_data_eigen[5].data.push( eigen );
-                do {
-                    i++;
-                    scatter_data_degree[5]['name'] = occupation;
-                    scatter_data_eigen[5]['name'] = occupation;
-                    bplot_data_degree[5]['name'] = occupation;
-                    bplot_data_eigen[5]['name'] = occupation;
-                } while (i < 1);
-                break;
+    const getGroups = (groupName,centrality) => {
+        let temp = [],
+            tempEvents = [],
+            tempCentrality = [];
+        data.forEach((elm) => {
+          if (elm.occupation == groupName) {
+
+            if(centrality === "degree") {
+                let degree = degreeCentrality(elm.id);
+                temp.push([degree, Number(elm.events.total)]);
+                tempCentrality.push(degree);
+            } else {
+                let eigen = pageRank(elm.id)*10;
+                temp.push([eigen, Number(elm.events.total)]);
+                tempCentrality.push(eigen);
             }
-    })
+            tempEvents.push(Number(elm.events.total));
+          }
+        });
+        let { line, r } = regression(tempEvents, tempCentrality);
+        return [temp, line, r, tempCentrality];
+    };
+
+      
+
+    group_series.forEach((e) => {
+        let names = ['degree','eigen'];
+        names.forEach((name) => {
+            let [scatterData, line, r, tempCentrality] = getGroups(e.name,name);
+            let scatter = {
+                type: "scatter",
+                visible: false,
+                name: e.name,
+                data: scatterData,
+                color: e.color
+            };
+            let linedata = {
+                name: e.name,
+                visible: true,
+                r: Number(r.toFixed(3)),
+                data: line,
+                color: e.color
+            }
+            let boxplot = {
+                name: e.name,
+                data: getBoxValues(tempCentrality),
+                color: e.color
+            };
+            if (name === 'degree') { 
+                scatter_data_degree.push(scatter,linedata);
+                bplot_data_degree.push(boxplot);
+            } else { 
+                scatter_data_eigen.push(scatter,linedata);
+                bplot_data_eigen.push(boxplot);
+            };
+        })
+    });
+
 
 }
 

@@ -62,7 +62,10 @@ let eventsLevel,
  *****************************************************************************/
 
 async function getData() {
-    const response = await fetch(`../api/nodes`);
+    const response = await fetch(
+      //`../api/nodes`
+      `https://europabon.org/members/network-analysis/api/nodes`
+      )
     return response.json();
 }
 
@@ -182,7 +185,6 @@ $.each(data.edges, key => {
 
 });
 
-//console.log(cluster_occupation);
 
 /*****************************************************************************
 *                      SORT OBJECT GROUPS
@@ -481,37 +483,47 @@ Utils.cy.ready( event => {
 
   Utils.populateDataTable(data.nodes);
 
-   /*                     TOGGLE GROUPS
+  /*                     TOGGLE GROUPS
   *************************************/
 
-  Utils.toggleGroups('.groups');
+ Utils.toggleGroups('.groups');
+
 
 
 });
 
-  
-
-  /*             GENERATE CHART DATA
-  *************************************/
-
-  Utils.chartData(data.nodes);
 
 /*****************************************************************************
 *                      HIGH CHARTS
 ******************************************************************************/
 
-Highcharts.setOptions({
-  colors: ['rgba(0, 128, 2, 1)', 'rgba(255, 165, 0, 1)', 'rgba(255, 0, 0, 1)','rgba(0, 4, 255, 1)','rgba(255, 255, 0, 1)','rgba(128, 1, 128, 1)']
-});
+/*             GENERATE CHART DATA
+  *************************************/
+
+Utils.chartData(data.nodes);
 
 /*                      SCATTER PLOT
-******************************************************************************/
+***************************************/
 
 
 const chart_scatter = Highcharts.chart('highcharts-activity-degreecentrality', {
     chart: {
-        type: 'scatter',
-        zoomType: 'xy'
+        type: 'line',
+        zoomType: 'xy',
+        events: {
+          load: function() {
+            this.update({
+              plotOptions: {
+                scatter: {
+                  marker: {
+                    symbol: "circle",
+                    fillColor: this.series.color
+                  }
+                }
+              }
+            });
+          }
+        }
     },
     xAxis: {
         title: {
@@ -540,18 +552,21 @@ const chart_scatter = Highcharts.chart('highcharts-activity-degreecentrality', {
         align: 'left'
     },
     tooltip: {
-        pointFormat: 'Centrality: {point.x} <br/> Number of events: {point.y}'
+      formatter: function () {
+        if (this.series.data.length > 2) {
+          return (
+            `Centrality: ${this.x} <br/> Number of events: ${this.y}`
+          );
+        } else {
+          return (
+            `${this.series.name} <br/>r: ${this.series.userOptions.r.toFixed(2)}`
+          );
+        }
+      }
     },
     series: Utils.scatter_data_degree,
     credits: {
       enabled: false
-    },
-    plotOptions: {
-      series: {
-          marker: {
-              symbol: 'circle'
-          }
-      }
     },
     navigation: {
       buttonOptions: {
@@ -566,23 +581,25 @@ const chart_scatter = Highcharts.chart('highcharts-activity-degreecentrality', {
     exporting: {
       buttons: {
         contextButton: {
-          menuItems: ["viewFullscreen",
-                      "printChart",
-                      "separator",
-                      "downloadPNG",
-                      "downloadJPEG",
-                      "downloadPDF",
-                      "downloadSVG",
-                      "separator",
-                      "downloadCSV",
-                      "downloadXLS"]
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "separator",
+            "downloadCSV",
+            "downloadXLS"
+          ]
         }
       }
     }
 });
 
 /*                      BOXPLOT
-******************************************************************************/
+***************************************/
 
 const chart_boxplot = Highcharts.chart('highcharts-occupation-degreecentrality', {
   chart: {
@@ -626,6 +643,7 @@ const chart_boxplot = Highcharts.chart('highcharts-occupation-degreecentrality',
         medianWidth: 3
     }
 },
+series: Utils.bplot_data_degree,
 credits: {
   enabled: false
 },
@@ -642,22 +660,22 @@ navigation: {
 exporting: {
   buttons: {
     contextButton: {
-      menuItems: ["viewFullscreen",
-                  "printChart",
-                  "separator",
-                  "downloadPNG",
-                  "downloadJPEG",
-                  "downloadPDF",
-                  "downloadSVG",
-                  "separator",
-                  "downloadCSV",
-                  "downloadXLS"]
+      menuItems: [
+        "viewFullscreen",
+        "printChart",
+        "separator",
+        "downloadPNG",
+        "downloadJPEG",
+        "downloadPDF",
+        "downloadSVG",
+        "separator",
+        "downloadCSV",
+        "downloadXLS"
+      ]
     }
   }
 }
 });
-
-$.each(Utils.bplot_data_degree, (index, {data,name}) => chart_boxplot.addSeries({data: Utils.getBoxValues(data), name: name}) );
 
 /*****************************************************************************
 *                      CLICK EVENTS
@@ -715,12 +733,12 @@ $('#select_group_centrality').on('change', function() {
     case 'eigenvector':
       chart_boxplot.yAxis[0].setTitle({text: 'Eigenvector centrality'});
       while(chart_boxplot.series.length>0) chart_boxplot.series[0].remove(false);
-      $.each(Utils.bplot_data_eigen, (index, {data,name}) => chart_boxplot.addSeries({data: Utils.getBoxValues(data), name: name}) );
+      Utils.bplot_data_eigen.forEach((e) => chart_boxplot.addSeries(e) );
       break;
     case 'degree':
       chart_boxplot.yAxis[0].setTitle({text: 'Degree centrality'});
       while(chart_boxplot.series.length>0) chart_boxplot.series[0].remove(false);
-      $.each(Utils.bplot_data_degree, (index, {data,name}) => chart_boxplot.addSeries({data: Utils.getBoxValues(data), name: name}) );
+      Utils.bplot_data_degree.forEach((e) => chart_boxplot.addSeries(e) );
       break;
   }
 })
@@ -729,12 +747,12 @@ $('#select_activity_centrality').on('change', function() {
     case 'eigenvector':
       chart_scatter.xAxis[0].setTitle({text: 'Eigenvector centrality'});
       while(chart_scatter.series.length>0) chart_scatter.series[0].remove(false);
-      $.each(Utils.scatter_data_eigen, (index, {data,name}) => chart_scatter.addSeries({data: data, name: name}) );
+      Utils.scatter_data_eigen.forEach((e) => chart_scatter.addSeries(e) );
       break;
     case 'degree':
       chart_scatter.xAxis[0].setTitle({text: 'Degree centrality'});
       while(chart_scatter.series.length>0) chart_scatter.series[0].remove(false);
-      $.each(Utils.scatter_data_degree, (index, {data,name}) => chart_scatter.addSeries({data: data, name: name}) );
+      Utils.scatter_data_degree.forEach((e) => chart_scatter.addSeries(e) );
       break;
   }
 })
