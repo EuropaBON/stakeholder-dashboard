@@ -21,7 +21,11 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	  <link rel="stylesheet" href="https://cytoscape.org/cytoscape.js-leaflet/cytoscape-leaf.css" />
+  
     <!-- Custom CSS -->
     <link href="css/custom.css" rel="stylesheet">
 
@@ -32,203 +36,140 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-custom sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                  <img class="img-shape" src="img/network-connection.png" alt=""> 
-                </div>
-                <div class="sidebar-brand-text mx-3">Network Analysis</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0 mb-3">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-              Show Network by
-          </div>
-
-            <!-- Nav Item - Dashboard -->
-            <li id="occupation" class="nav-item active">
-                <a class="nav-link" href="javascript:void(0)">
-                    <i class="fas fa-university fa-lg"></i>
-                    <span>Occupation</span></a>
-            </li>
-
-
-            <!-- Nav Item - Charts -->
-            <li id="realm" class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                    <i class="fas fa-images fa-lg"></i>
-                    <span>Realm</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li id="region" class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                    <i class="fas fa-globe-europe fa-lg"></i>
-                    <span>EU-region</span></a>
-            </li>
-
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline mt-5">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            
-
-        </ul>
-        <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="bg-cover" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.9) 100%), url(./img/dots.jpg)">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 pb-0 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group" id="search-node-div"></div>                        
-                    </form>
-
+                  <div class="container-fluid" style="max-width:90%">
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search pt-0">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small shadow-none typeahead tt-query"
-                                            placeholder="Search and zoom to node">
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link" href="https://europabon.org">
-                                <img class="img-profile" src="img/logo.png">
-                            </a>
-                        </li>
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link" href="https://europabon.org">
+                          <img class="img-profile" src="img/logo.png"> <div class="sidebar-brand-text text-dark mx-3">Europa Biodiversity Observation Network</div>
+                        </a>
+                      </li>
                     </ul>
+                    <a href="https://europabon.org/members" target="_blank" id="members-button" class="btn btn-outline-primary shadow-sm">
+                      <i class="fas fa-user"></i> Members Portal
+                    </a>
+                  </div>
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="max-width:90%">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 group-header-name">Occupation</h1>
-                        <a href="https://europabon.org/members" target="_blank" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
-                                class="fas fa-user fa-sm text-white-50"></i> Members Portal</a>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h6 class="font-weight-bold text-primary">Welcome to EuropaBON's interactive stakeholder network visualizer!</h6>
+                        <p>This website allows you to map Europe's biodiversity community, its key actors and their connections. You can visualize the network by sector (e.g., academia, private industry), realm (e.g., marine, freshwater), or region (e.g., eastern Europe, southern Europe). 
+                          The application also allows you to see which sectors, realms or regions have most of the connections and which actors are central to the network. Play around with our interactive graphs to e.g., identify those actors who are influential and have actively engaged in designing the future European biodiversity monitoring system.</p>
+                          <p>The network is comprised of two fundamental components: nodes and connections. Nodes represent member institutions that are registered within the <a href="https://europabon.org/members" target="_blank">EuropaBON network</a>, and connections between them are established based on their data-sharing interactions. Each node possesses distinct attributes, including the type of institution (e.g., occupational sector), the thematic focus of their work, and their geographical location, encompassing both country and region.
+                            To assess the centrality of each node within the network, we employed two key metrics: Degree centrality, which measures the number of connections a node has, and Eigenvector centrality, a metric gauging the influence of a node within the network as determined by the Page Rank algorithm.
+                            The construction of the network graph was facilitated using <a href="https://cytoscape.org/" target="_blank">Cytoscape</a> using a force-directed layout to visually identify clusters and bridges. The boxplot, scatter chart, and chord diagram were created using <a href="https://www.highcharts.com/" target="_blank">Highcharts</a>. All associated code can be accessed on our <a href="https://github.com/EuropaBON/network-analysis" target="_blank">GitHub repository</a>.</p>
+                          <p>Try out these and many other features of this webpage and let us know what you think! Please send your suggestions for improving the site and/ or for adding features to <a href="mailto:web@europabon.org">web@europabon.org</a>.</p>
+                          <p><a class="coll_doi_link" href="https://doi.org/10.3897/rio.coll.145" target="_blank"><span class="col_doi"></span> 10.3897/rio.coll.145</a></p>
+                      </div>
                     </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                          <h1 class="h3 mb-0 text-gray-800 group-header-name">EU region</h1>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-12">
+                        <!-- Topbar Search -->
+                        <form class="d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                          <div class="input-group" id="search-node-div"></div>                        
+                        </form>
+                      </div>
+                    </div>
+
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Card Nodes-->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Nodes (incl. <span class="no-data-name"></span>)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                              <span id="totalNodes"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dot-circle fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card Edges -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Connections (incl. <span class="no-data-name"></span>)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                              <span id="totalEdges"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card Top Counts -->
-                        <div class="col-xl-6 col-md-12 mb-4">
-                            <div class="card shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Top Occupation</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                      <span id="topOccupation"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col mr-2">
-                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Top Realm</div>
-                                          <div class="row no-gutters align-items-center">
-                                              <div class="col-auto">
-                                                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                    <span id="topRealm"></span>
-                                                  </div>
-                                              </div>
+                      <!-- Card Nodes-->
+                      <div class="col-xl-3 col-md-6 mb-4">
+                          <div class="card shadow h-100 py-2">
+                              <div class="card-body">
+                                  <div class="row no-gutters align-items-center">
+                                      <div class="col mr-2">
+                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                              Total Nodes (incl. <span class="no-data-name"></span>)</div>
+                                          <div class="h3 mb-0 font-weight-bold text-gray-800">
+                                            <span id="totalNodes"></span>
                                           </div>
-                                        </div>
-                                        <div class="col mr-2">
-                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Top EU-Region</div>
-                                          <div class="row no-gutters align-items-center">
-                                              <div class="col-auto">
-                                                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                    <span id="topRegion"></span>
-                                                  </div>
-                                              </div>
+                                      </div>
+                                      <div class="col-auto">
+                                          <i class="fas fa-dot-circle fa-2x text-gray-300"></i>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- Card Edges -->
+                      <div class="col-xl-3 col-md-6 mb-4">
+                          <div class="card shadow h-100 py-2">
+                              <div class="card-body">
+                                  <div class="row no-gutters align-items-center">
+                                      <div class="col mr-2">
+                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                              Total Connections (incl. <span class="no-data-name"></span>)</div>
+                                          <div class="h3 mb-0 font-weight-bold text-gray-800">
+                                            <span id="totalEdges"></span>
                                           </div>
-                                        </div>
+                                      </div>
+                                      <div class="col-auto">
+                                          <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
+                      <!-- Card Network -->
+                      <div class="col-xl-6 col-md-12 mb-4">
+                          <div class="card shadow h-100 py-2">
+                              <div class="card-body">
+                                  <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Show Network by</div>
+                                        <ul class="nav nav-pills nav-fill">
+                                          <li class="nav-item">
+                                            <a id="occupation" class="nav-link" href="javascript:void(0)"> 
+                                              <i class="fas fa-university"></i>
+                                              <span>Sector</span> 
+                                            </a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a id="realm" class="nav-link" href="javascript:void(0)">
+                                              <i class="fas fa-images"></i>
+                                              <span>Realm</span>
+                                            </a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a id="region" class="nav-link active" href="javascript:void(0)">
+                                              <i class="fas fa-globe-europe"></i>
+                                              <span>EU-region</span>
+                                            </a>
+                                          </li>
+                                        </ul>                 
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
-                      
                     </div>
 
                     <!-- Content Row -->
@@ -238,6 +179,7 @@
                         <div class="card shadow mb-4">
                           <div class="card-body p-0">
 
+                            <div id="cy-leaflet"></div>
                             <div id="europabon-network">
                               <div id="spinner">
                                 <div class="spinner-grow text-info" role="status">
@@ -246,10 +188,11 @@
                                 <p class="p-3">Please wait ...</p>
                               </div>
                             </div>
+                            
 
                             <!-- Info Box -->
                             <div id="info-box" class="alert alert-primary alert-dismissible fade show" role="alert" style="display:none">
-                              <i class="fas fa-info-circle"></i> Hover over a node to view its properties
+                              <i class="fas fa-info-circle"></i> By selecting the hand icon at the bottom left, you can zoom in on the map. If you choose the mouse pointer icon, you can hover over a node to view its properties.<!-- <br>The layout positions nodes in concentric circles, based on degree centrality placing higher nodes in <span id="maxDegree"></span> levels towards the centre. -->
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -258,15 +201,14 @@
                             <div id="legend" style="display:none">
                               <button type="button" id="fitToExtent" class="btn btn-light mb-3">Reset Zoom</button>
                               <div class="card-title">Legend</div>
-                              <p class="group-header-name">Occupation</p>
+                              <p class="group-header-name">EU region</p>
                               <small>Click to hide</small>
                               <div id="legend-groups" class="shapes mb-3">
-                                <div class="rectangle color-green"></div><small class="groups" value="Academia"> Academia</small><br>
-                                <div class="rectangle color-orange"></div><small class="groups" value="Non-Governmental Organization"> NGO</small><br>
-                                <div class="rectangle color-red"></div><small class="groups" value="Governmental Organization"> Governmental Organization</small><br>
-                                <div class="rectangle color-blue"></div><small class="groups" value="Private Industry"> Private Industry</small><br>
-                                <div class="rectangle color-yellow"></div><small class="groups" value="Citizen Science"> Citizen Science</small><br>
-                                <div class="rectangle color-purple"></div><small class="groups" value="Other"> Other</small>
+                                <div class="rectangle color-green"></div><small class="groups" value="Northern Europe"> Northern Europe</small> <i class="fas fa-info-circle align-middle" data-toggle="popover" data-trigger="hover" data-html="true" data-original-title="Northern Europe"></i> <br>
+                                <div class="rectangle color-orange"></div><small class="groups" value="Western Europe"> Western Europe</small> <i class="fas fa-info-circle align-middle" data-toggle="popover" data-trigger="hover" data-html="true" data-original-title="Western Europe"></i><br>
+                                <div class="rectangle color-red"></div><small class="groups" value="Eastern Europe"> Eastern Europe</small> <i class="fas fa-info-circle align-middle" data-toggle="popover" data-trigger="hover" data-html="true" data-original-title="Eastern Europe"></i><br>
+                                <div class="rectangle color-blue"></div><small class="groups" value="Southern Europe"> Southern Europe</small> <i class="fas fa-info-circle align-middle" data-toggle="popover" data-trigger="hover" data-html="true" data-original-title="Southern Europe"></i><br>
+                                <div class="rectangle color-yellow"></div><small class="groups" value="not europe"> Not Europe</small>
                               </div>
                               <p>Data position</p>
                               <div class="shapes mb-3">
@@ -278,8 +220,8 @@
                               <p>Activity level</p>
                               <div class="shapes mb-3">
                                 <div class="rectangle rectangle-small color-white border"></div><small> <b> 0</b> None (0 events)</small><br>
-                                <div class="rectangle rectangle-small color-grey-activity"></div><small> <b> 1</b> Low (1 -2 events)</small><br>
-                                <div class="rectangle rectangle-small color-black"></div><small> <b> 2</b> High (> 2 events)</small>
+                                <div class="rectangle rectangle-small color-grey-activity"></div><small> <b> 1</b> Low (1 -5 events)</small><br>
+                                <div class="rectangle rectangle-small color-black"></div><small> <b> 2</b> High (> 5 events)</small>
                               </div>
                               <div class="mt-4">
                                 <a id="saveAsImage" href="javascript:void(0)"><i class="fas fa-download"></i> Export View as JPG</a>
@@ -300,11 +242,11 @@
                           <div class="card-header py-3">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <h6 class="m-0 font-weight-bold text-primary">Total nodes by <span class="group-name">Occupation</span> (excl. <span class="no-data-name"></span>)</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Total nodes by <span class="group-name">Sector</span> (excl. <span class="no-data-name"></span>)</h6>
                               </div>
                               <div class="col-4">
                                 <select id="select_group" class="form-control">
-                                  <option value="occupation">Occupation</option>
+                                  <option value="occupation">Sector</option>
                                   <option value="realm">Realm</option>
                                   <option value="region">EU-region</option>
                                 </select>
@@ -322,12 +264,12 @@
                           <div class="card-header py-3">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <h6 class="m-0 font-weight-bold text-primary"><span class="group-header-name">Occupation</span> by centrality</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><span class="group-header-name">EU region</span> by centrality</h6>
                               </div>
                               <div class="col-4">
                                 <select id="select_group_centrality" class="form-control">
                                   <option value="degree">Degree centrality</option>
-                                  <option value="eigenvector">Eigenvector centrality<sup>*</sup></option>
+                                  <option value="eigen">Eigenvector centrality<sup>*</sup></option>
                                 </select>
                               </div>
                             </div>
@@ -352,7 +294,7 @@
                               <div class="col-4">
                                 <select id="select_centrality_ranking" class="form-control">
                                   <option value="degreeRank">Most connected</option>
-                                  <option value="eigenRank">Most influential<sup>*</sup></option>
+                                  <option value="eigenRank">Most central<sup>*</sup></option>
                                 </select>
                               </div>
                             </div>
@@ -368,12 +310,12 @@
                           <div class="card-header py-3">
                             <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
-                                <h6 class="m-0 font-weight-bold text-primary"><span class="group-header-name">Occupation</span> by centrality and number of events</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><span class="group-header-name">EU region</span> by centrality and number of events</h6>
                               </div>
                               <div class="col-4">
                                 <select id="select_activity_centrality" class="form-control">
                                   <option value="degree">Degree centrality</option>
-                                  <option value="eigenvector">Eigenvector centrality<sup>*</sup></option>
+                                  <option value="eigen">Eigenvector centrality<sup>*</sup></option>
                                 </select>
                               </div>
                             </div>
@@ -386,6 +328,59 @@
                           </div>
                         </div>
 
+                      </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <!-- Card Group by-->
+                        <div class="card shadow mb-4">
+                          <div class="card-header py-3">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <h6 class="m-0 font-weight-bold text-primary">Connections to key EU projects and infrastructures (excl. projects with less than 2 connections)</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <figure class="highcharts-figure">
+                              <div id="projects-container" style="height:700px"></div>
+                            </figure>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <!-- Top projects -->
+                        <div class="card shadow mb-4">
+                          <div class="card-header py-3">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <h6 class="m-0 font-weight-bold text-primary">5 most connected EU projects and infrastructures</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <table class="table">
+                              <tbody id="topProjects"></tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- Categories -->
+                        <div class="card shadow mb-4">
+                          <div class="card-header py-3">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <h6 class="m-0 font-weight-bold text-primary">Total EU projects/ infrastructures grouped by categories</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <table class="table">
+                              <tbody id="topCategories"></tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -402,14 +397,15 @@
                                   <table class="table is-striped" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                       <tr>
-                                        <!-- <th>ID</th> -->
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Data position</th>
-                                        <th>Occupation</th>
+                                        <th>Sector</th>
                                         <th>Country</th>
                                         <th>Realm</th>
                                         <!-- <th>Spatial scope</th>
-                                        <th>EU directive</th> -->
+                                        <th>EU directive</th>
+                                        <th>Projects</th> -->
                                         <th>EU region</th>
                                         <th>Activity level</th>
                                         <th>Activity total</th>
@@ -434,11 +430,33 @@
                 </div>
                 <!-- /.container-fluid -->
 
+                <div id="footer-support">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center mb-5">
+                        <a href="https://www.uni-halle.de/"><img class="img-fluid d-block mx-auto" src="./img/logos/mlu.png" alt="Martin-Luther-Universität Halle-Wittenberg" /></a>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center mb-5">
+                          <a href="https://www.idiv.de/"><img class="img-fluid d-block mx-auto" src="./img/logos/idiv.png" alt="German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig" /></a>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center mb-5">
+                          <a href="https://ec.europa.eu/programmes/horizon2020/en" target="_blank"><img class="img-fluid d-block mx-auto" style="padding:60px 60px 0 60px" src="./img/logos/EU-logo.png" alt="European union" /></a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="text-center mb-10">
+                                <p class="lead">This project receives funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 101003553</p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span id="copyright">&copy; <script>
@@ -447,11 +465,71 @@
                             <a href="https://europabon.org/members" target="_blank">europabon.org/members</a></span>
                     </div>
                 </div>
+            </footer> -->
+
+
+            <!-- Footer-->
+            <footer id="footer">
+              <div class="footer-top">
+                <div class="container">
+                  <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                      <img src="./img/logo-white.png" class="img-fluid" alt="logo">
+                      <p>Europa Biodiversity Observation Network: integrating data streams to support policy</p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                      <h4>Mission</h4>
+                      <p>EuropaBONs mission is to overcome existing data gaps and workflow bottlenecks by designing an EU-wide framework for monitoring biodiversity and ecosystem services.</p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                      <h4>Useful Links</h4>
+                      <ul>
+                        <li><i class="fa fa-angle-right"></i> <a href="https://europabon.org" target="_blank">EuropaBON website</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="https://europabon.org/members" target="_blank">EuropaBON members portal</a></li>
+                      </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                      <h4>Contact Us</h4>
+                      <p>
+                        German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig <br>
+                        Puschstrasse 4<br>
+                        04103 Leipzig, GERMANY<br>
+                        <strong>Email:</strong> <a href="mailto:info@europabon.org">info@europabon.org</a><br>
+                      </p>
+
+                      <div class="social-links">
+                        <a href="https://www.facebook.com/EuropaBon-106039931353308" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/EuropaBon_H2020" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div id="copyright" class="copyright">
+                  &copy; <script>
+                    document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+                  </script> <strong>europabon.org</strong>. All Rights Reserved | <a href="https://europabon.org/wp-content/uploads/downloads/pdf/data-policy.pdf" target="_blank">Data policy</a> | <a href="https://europabon.org/wp-content/uploads/downloads/pdf/imprint.pdf" target="_blank">Imprint</a> | <a href="https://europabon.org/wp-content/uploads/downloads/pdf/disclaimer.pdf" target="_blank">Disclaimer</a>
+                </div>
+                <div class="credits">
+                  <!--
+                    All the credits should remain intact.
+                  -->
+                  Developed by <a href="mailto:christian.langer@idiv.de">Christian Langer/iDiv</a> | <a href="https://github.com/ChristianLanger" target="_blank">GitHub</a>
+                </div>
+              </div>
             </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
+
+        
 
     </div>
     <!-- End of Page Wrapper -->
@@ -474,9 +552,15 @@
     <!-- cytoscape -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.23.0/cytoscape.min.js'></script>
   <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+
+  <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+
   <script src="https://unpkg.com/cose-base/cose-base.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape-fcose@2.2.0/cytoscape-fcose.min.js"></script>
   <script src="vendor/cytoscape-view-utilities.js"></script>
+
+  
+  <!-- <script src="vendor/cytoscape-cise.js"></script> -->
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
   <script src="vendor/cytoscape-popper.js"></script>
@@ -485,10 +569,15 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-more.js"></script>
   <script src="https://code.highcharts.com/modules/networkgraph.js"></script>
+  <script src="https://code.highcharts.com/modules/sankey.js"></script>
+  <script src="https://code.highcharts.com/modules/dependency-wheel.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+
+  <!-- Color palette (viridis) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-scale-chromatic/3.4.0/index.min.js"></script>
 
   <!-- typeahead -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
@@ -496,9 +585,13 @@
   <!-- Datatables -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> -->
+  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+  <!-- Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://cytoscape.org/cytoscape.js-leaflet/cytoscape-leaf.js"></script>
 
   <!-- File Saver -->
   <script src="vendor/FileSaver/FileSaver.min.js"></script>

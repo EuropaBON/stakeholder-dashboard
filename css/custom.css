@@ -3,6 +3,10 @@ body {
     color: #555;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 #europabon-network {
     height: 700px;
   }
@@ -83,83 +87,11 @@ body {
     background: #111;
   }
   
-  div.vis-tooltip{
-    white-space: normal !important;
-    border: 1px solid #dfdfdf !important;
-    padding: 40px !important;
-    background-color: #ffffff !important;
-    width: 500px !important;
-    word-break: break-word !important;
-    top: 0 !important;
-    z-index: 1000 !important;
-    position: fixed !important;
-  }
-  
   .bg-gradient-custom {
     background-image: linear-gradient(15deg, #027bb6 0%, #00a396 130%)
   }
   
-  
-  
-  /* loading bar */
-  
-  #loadingBar {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    opacity: 1;
-  }
-  /* #wrapper {
-    position: relative;
-    width: 2000px;
-    height: 1000px;
-  } */
-  
-  #text {
-    position: absolute;
-    top: 8px;
-    right: 60px;
-    width: 30px;
-    height: 50px;
-    margin: auto auto auto auto;
-    font-size: 22px;
-    color: #000000;
-  }
-  
-  div.outerBorder {
-    position: relative;
-    height: 44px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  #border {
-    position: absolute;
-    top: 13px;
-    left: 10px;
-    width: 90%;
-    height: 23px;
-    margin: auto auto auto auto;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-  }
-  
-  #bar {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 20px;
-    height: 23px;
-    margin: auto auto auto auto;
-    border-radius: 11px;
-    background: linear-gradient(15deg, #027bb6 0%, #00a396 50%);
-    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
-  }
-  
+
   
   /* Progress bar */
   
@@ -275,11 +207,13 @@ body {
     font-size: 16px;   
 }
 
-#search-node-input{
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-}
+  #search-node-input{
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      width: 250px;
+      border-bottom: 1px solid #c5c4c4
+  }
   .typeahead .dropdown-item{
     padding: 15px !important;
     font-size: 15px !important;
@@ -289,13 +223,14 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1
+    z-index: 1;
+    width: 500px
   }
   
   #legend {
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 20px;
     right: 0;
     padding: 20px;
     border-left: 1px solid #eaeaea;
@@ -359,13 +294,8 @@ body {
     font-weight: bold;
   }
   
-  @media only screen and (max-width: 720px) {
-    #search-node-input {
-      width: 13rem;
-    }
-  }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 705px) {
     .dropdown-menu>li>a {
         word-wrap: break-word;
         white-space: normal;
@@ -373,6 +303,12 @@ body {
     
     .dropdown-menu{
         max-width: 500px;
+    }
+    #members-button {
+      display: none
+    }
+    .sidebar-brand-text{
+      font-size: 12px
     }
   }
 
@@ -403,3 +339,205 @@ CYTOSCAPE
     text-align: center;
     top: 50%;
   }
+  
+  #cy-leaflet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+  }
+
+  .bg-cover {
+    background-repeat: repeat;
+    background-size: auto;
+}
+
+ /* Footer */
+
+ #footer-support {
+  padding: 60px 0 30px 0;
+}
+
+#footer {
+  background: #101522;
+  padding: 0 0 25px 0;
+  color: #eee;
+  font-size: 14px;
+}
+
+#footer .footer-top {
+  background: #040919;
+  padding: 60px 0 30px 0;
+}
+
+#footer .footer-top .footer-info {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-info h3 {
+  font-size: 26px;
+  margin: 0 0 20px 0;
+  padding: 2px 0 2px 0;
+  line-height: 1;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+
+#footer .footer-top .footer-info img {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+#footer .footer-top .footer-info p {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+  font-family: "Raleway", sans-serif;
+  color: #fff;
+}
+
+#footer .footer-top .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  background: #222636;
+  color: #eee;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+
+#footer .footer-top .social-links a:hover {
+  background: #125ca3;
+  color: #fff;
+}
+
+#footer .footer-top h4 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #028c7c;
+}
+
+#footer .footer-top .footer-links {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#footer .footer-top .footer-links ul i {
+  padding-right: 5px;
+  color: #028c7c;
+  font-size: 18px;
+}
+
+#footer .footer-top .footer-links ul li {
+  border-bottom: 1px solid #262c44;
+  padding: 10px 0;
+}
+
+#footer .footer-top .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+#footer .footer-top .footer-links ul a {
+  color: #eee;
+}
+
+#footer .footer-top .footer-links ul a:hover {
+  color: #028c7c;
+}
+
+#footer .footer-top .footer-contact {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-contact p {
+  line-height: 26px;
+}
+
+#footer .footer-top .footer-newsletter {
+  margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-newsletter input[type="email"] {
+  border: 0;
+  padding: 6px 8px;
+  width: 65%;
+}
+
+#footer .footer-top .footer-newsletter input[type="submit"] {
+  background: #f82249;
+  border: 0;
+  width: 35%;
+  padding: 6px 0;
+  text-align: center;
+  color: #fff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#footer .footer-top .footer-newsletter input[type="submit"]:hover {
+  background: #e0072f;
+}
+
+#footer .copyright {
+  text-align: center;
+  padding-top: 30px;
+}
+
+#footer .credits {
+  text-align: center;
+  color: #ddd;
+  padding-top: 5px;
+}
+
+#footer .copyright a, #footer .credits a {
+  color: #028c7c;
+}
+
+#footer .copyright a:hover, #footer .credits a:hover{
+  color: #fff;
+}
+
+/* /Footer */
+
+
+/* DOI from RIO journal */
+
+.coll_doi_link {
+  border: 1px solid #1b8aae;
+  padding: 0 5px 0 0px;
+  border-radius: 2px;
+  color: #1b8aae;
+  position: relative;
+  top: -2px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.col_doi {
+  background: url(https://riojournal.com/i/doi-icon.svg) no-repeat;
+  background-size: contain;
+  width: 26px;
+  height: 18px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  left: -1px;
+}
