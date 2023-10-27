@@ -1,6 +1,7 @@
 ## EuropaBON Network Analysis
 
 Fully responsive web app to visualize the network of EuropaBON by using [Cytoscape JS](https://js.cytoscape.org/)
+The EuropaBON stakeholder network visualizer can be accessed via: [https://europabon.org/members/network-analysis/src](https://europabon.org/members/network-analysis/src)
 
 ![screens](./screens/screens.png)
 
