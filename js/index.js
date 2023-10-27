@@ -169,7 +169,6 @@ observer.observe(targetNode, config);
 
 async function getData() {
     const response = await fetch(
-      //`../api/nodes`
       `https://europabon.org/members/network-analysis/api/nodes`
       //`http://localhost:8080/europabon.org/network-analysis/api/nodes`
       )

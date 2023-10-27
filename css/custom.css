@@ -527,14 +527,14 @@ CYTOSCAPE
   position: relative;
   top: -2px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .col_doi {
   background: url(https://riojournal.com/i/doi-icon.svg) no-repeat;
   background-size: contain;
   width: 26px;
-  height: 18px;
+  height: 19px;
   cursor: pointer;
   display: inline-block;
   position: relative;
