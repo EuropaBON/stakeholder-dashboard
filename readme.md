@@ -4,7 +4,8 @@ Fully responsive web app to visualize the network of EuropaBON by using [Cytosca
 
 ## Demo
 
-The EuropaBON stakeholder network visualizer can be accessed via: [https://europabon.org/members/network-analysis/src](https://europabon.org/members/network-analysis/src)
+The EuropaBON stakeholder network visualizer can be accessed via:
+[https://europabon.org/members/network-analysis/src](https://europabon.org/members/network-analysis/src)
 
 ![screens](./screens/screens.png)
 
