@@ -334,8 +334,7 @@ CYTOSCAPE
   }
   
   #spinner {
-    left: 50%;
-    position: absolute;
+    position: relative;
     text-align: center;
     top: 50%;
   }

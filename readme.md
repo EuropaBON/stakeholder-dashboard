@@ -1,10 +1,10 @@
-## EuropaBON Network Analysis
+## EuropaBON Network Dashboard
 
 Fully responsive web app to visualize the network of EuropaBON by using [Cytoscape JS](https://js.cytoscape.org/)
 
 ## Demo
 
-The EuropaBON stakeholder network visualizer can be accessed via:\
+The EuropaBON network dashboard can be accessed via:\
 [https://europabon.org/members/network-analysis/src](https://europabon.org/members/network-analysis/src)
 
 ![screens](./screens/screens.png)
@@ -24,7 +24,7 @@ Cytoscape rank the nodes in the collection using the [Page Rank algorithm](https
 
 ## Source Data
 
-Data is automatically provided by the [EuropaBON members portal](https://europabon.org/members) from a REST API.
+Data is dynamically provided by the [EuropaBON members portal](https://europabon.org/members) from a REST API.
 
 ## Built With
 

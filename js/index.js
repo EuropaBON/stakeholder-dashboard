@@ -415,6 +415,7 @@ projects_data.forEach(([from, to, count]) => {
   project_object[from] = (project_object[from] || 0) + count;
   project_object[to] = (project_object[to] || 0) + count;
 });
+console.log(project_object);
 
 // fetch projects from API
 fetch('https://europabon.org/members/network-analysis/api/projects')
@@ -434,7 +435,7 @@ fetch('https://europabon.org/members/network-analysis/api/projects')
     });
     const category_object_sorted = Utils.sortObject(category_object);
     Utils.topRanking(category_object_sorted,'topCategories');
-    //console.log(category_object_sorted);
+    console.log(category_object_sorted);
     
   })
   .catch(error => {

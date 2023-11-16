@@ -29,6 +29,22 @@
     <!-- Custom CSS -->
     <link href="css/custom.css" rel="stylesheet">
 
+    <!-- Matomo -->
+    <script>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="https://wwwstat.rz.uni-leipzig.de/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '65']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body id="page-top">
@@ -65,12 +81,12 @@
 
                     <div class="row">
                       <div class="col-md-12">
-                        <h6 class="font-weight-bold text-primary">Welcome to EuropaBON's stakeholder network visualizer!</h6>
-                        <p>This website allows you to map Europe's biodiversity community, its key actors and their connections. You can visualize the network by sector (e.g., academia, private industry), realm (e.g., marine, freshwater), or region (e.g., eastern Europe, southern Europe). 
-                          The application also allows you to see which sectors, realms or regions have most of the connections and which actors are central to the network. Play around with our interactive graphs to e.g., identify those actors who are influential and have actively engaged in designing the future European biodiversity monitoring system.</p>
-                          <p>The network is comprised of two fundamental components: nodes and connections. Nodes represent member institutions that are registered within the <a href="https://europabon.org/members" target="_blank">EuropaBON network</a>, and connections between them are established based on their data-sharing interactions. Each node possesses distinct attributes, including the type of institution (e.g., occupational sector), the thematic focus of their work, and their geographical location, encompassing both country and region.
+                        <h4 class="font-weight-bold text-primary">EuropaBON Network Dashboard</h4>
+                        <p>The EuropaBON network dashboard allows you to map Europe's biodiversity community, its key actors and their connections. You can visualize the network by sector (e.g., academia, private industry), realm (e.g., marine, freshwater), or region (e.g., eastern Europe, southern Europe). 
+                          The dashboard also allows you to see which sectors, realms or regions have most of the connections and which actors are central to the network. Play around with our interactive graphs to e.g., identify those actors who are influential and have actively engaged in designing the future European biodiversity monitoring system. All the graphs are calculated dynamically based on the most current stakeholder data available.</p>
+                          <p>The network graph is comprised of two fundamental components: nodes and connections. Nodes represent member institutions that are registered within the <a href="https://europabon.org/members" target="_blank">EuropaBON network</a>, and connections between them are established based on their data-sharing interactions. Each node possesses distinct attributes, including the type of institution (e.g., occupational sector), the thematic focus of their work, and their geographical location, encompassing both country and region.
                             To assess the centrality of each node within the network, we employed two key metrics: Degree centrality, which measures the number of connections a node has, and Eigenvector centrality, a metric gauging the influence of a node within the network as determined by the Page Rank algorithm.
-                            The construction of the network graph was facilitated using <a href="https://cytoscape.org/" target="_blank">Cytoscape</a> using a force-directed layout to visually identify clusters and bridges. The boxplot, scatter chart, and chord diagram were created using <a href="https://www.highcharts.com/" target="_blank">Highcharts</a>. All associated code can be accessed on our <a href="https://github.com/EuropaBON/network-analysis" target="_blank">GitHub repository</a>.</p>
+                            The construction of the network graph was facilitated using <a href="https://js.cytoscape.org/" target="_blank">Cytoscape JS</a> using a force-directed layout to visually identify clusters and bridges. The charts and diagrams were created using <a href="https://www.highcharts.com/" target="_blank">Highcharts</a>. All associated code can be accessed on our <a href="https://github.com/EuropaBON/network-analysis" target="_blank">GitHub repository</a>.</p>
                           <p>Please send your suggestions for improving the site and/ or for adding features to <a href="mailto:web@europabon.org">web@europabon.org</a>.</p>
                           <p><a href="https://doi.org/10.5281/zenodo.10047342" target="_blank"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10047342.svg" alt="DOI"></a></p>
                       </div>
@@ -185,7 +201,7 @@
                                 <div class="spinner-grow text-info" role="status">
                                   <span class="sr-only">Loading...</span>
                                 </div>
-                                <p class="p-3">Please wait ...</p>
+                                <p class="p-3">Grab a coffee, we'll calculate the network for you from the current data</p>
                               </div>
                             </div>
                             
