@@ -10,7 +10,7 @@
     <meta name="author" content="Christian Langer">
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <title>EuropaBON network analysis</title>
+    <title>EuropaBON Stakeholder Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -81,13 +81,16 @@
 
                     <div class="row">
                       <div class="col-md-12">
-                        <h4 class="font-weight-bold text-primary">EuropaBON Network Dashboard</h4>
-                        <p>The EuropaBON network dashboard allows you to map Europe's biodiversity community, its key actors and their connections. You can visualize the network by sector (e.g., academia, private industry), realm (e.g., marine, freshwater), or region (e.g., eastern Europe, southern Europe). 
-                          The dashboard also allows you to see which sectors, realms or regions have most of the connections and which actors are central to the network. Play around with our interactive graphs to e.g., identify those actors who are influential and have actively engaged in designing the future European biodiversity monitoring system. All the graphs are calculated dynamically based on the most current stakeholder data available.</p>
-                          <p>The network graph is comprised of two fundamental components: nodes and connections. Nodes represent member institutions that are registered within the <a href="https://europabon.org/members" target="_blank">EuropaBON network</a>, and connections between them are established based on their data-sharing interactions. Each node possesses distinct attributes, including the type of institution (e.g., occupational sector), the thematic focus of their work, and their geographical location, encompassing both country and region.
-                            To assess the centrality of each node within the network, we employed two key metrics: Degree centrality, which measures the number of connections a node has, and Eigenvector centrality, a metric gauging the influence of a node within the network as determined by the Page Rank algorithm.
-                            The construction of the network graph was facilitated using <a href="https://js.cytoscape.org/" target="_blank">Cytoscape JS</a> using a force-directed layout to visually identify clusters and bridges. The charts and diagrams were created using <a href="https://www.highcharts.com/" target="_blank">Highcharts</a>. All associated code can be accessed on our <a href="https://github.com/EuropaBON/network-analysis" target="_blank">GitHub repository</a>.</p>
-                          <p>Please send your suggestions for improving the site and/ or for adding features to <a href="mailto:web@europabon.org">web@europabon.org</a>.</p>
+                        <h1 class="font-weight-bold text-primary">EuropaBON Stakeholder Dashboard</h1>
+                        <p class="lead">Connecting Stakeholders for Biodiversity</p>
+                        <p>The EuropaBON Stakeholder Dashboard allows you to map Europe's biodiversity community, its key actors and their connections. You can visualize the network by sector (e.g., academia, private industry), realm (e.g., marine, freshwater), or region (e.g., eastern Europe, southern Europe). 
+                          The dashboard also allows you to see which sectors, realms or regions have most of the connections and which actors are central to the network. Play around with our interactive graphs to e.g., identify those actors who are influential and have actively engaged in designing the future European biodiversity monitoring system. All the graphs are calculated dynamically based on the most current stakeholder data available. <a href="javascript:void(0)" id="readMoreButton" data-toggle="collapse" data-target="#readMore" aria-expanded="false" aria-controls="readMore">Read More</a></p>
+                          
+                          <div class="collapse" id="readMore">
+                            <p>The network graph is comprised of two fundamental components: nodes and connections. Nodes represent member institutions that are registered within the <a href="https://europabon.org/members" target="_blank">EuropaBON members portal</a>, and connections between them are established based on their data-sharing interactions. Each node possesses distinct attributes, including the type of institution (e.g., occupational sector), the thematic focus of their work, and their geographical location, encompassing both country and region.
+                                  To assess the centrality of each node within the network, we employed two key metrics: Degree centrality, which measures the number of connections a node has, and Eigenvector centrality, a metric gauging the influence of a node within the network as determined by the Page Rank algorithm.
+                                  The construction of the network graph was facilitated using <a href="https://js.cytoscape.org/" target="_blank">Cytoscape JS</a> using a force-directed layout to visually identify clusters and bridges. The charts and diagrams were created using <a href="https://www.highcharts.com/" target="_blank">Highcharts</a>. All associated code can be accessed on our <a href="https://github.com/EuropaBON/stakeholder-dashboard" target="_blank">GitHub repository</a>.</p>
+                          </div>
                           <p><a href="https://doi.org/10.5281/zenodo.10047342" target="_blank"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10047342.svg" alt="DOI"></a></p>
                       </div>
                     </div>
@@ -236,8 +239,8 @@
                               <p>Activity level</p>
                               <div class="shapes mb-3">
                                 <div class="rectangle rectangle-small color-white border"></div><small> <b> 0</b> None (0 events)</small><br>
-                                <div class="rectangle rectangle-small color-grey-activity"></div><small> <b> 1</b> Low (1 -5 events)</small><br>
-                                <div class="rectangle rectangle-small color-black"></div><small> <b> 2</b> High (> 5 events)</small>
+                                <div class="rectangle rectangle-small color-grey-activity"></div><small> <b> 1</b> Low (1 -8 events)</small><br>
+                                <div class="rectangle rectangle-small color-black"></div><small> <b> 2</b> High (> 8 events)</small>
                               </div>
                               <div class="mt-4">
                                 <a id="saveAsImage" href="javascript:void(0)"><i class="fas fa-download"></i> Export View as JPG</a>
@@ -601,9 +604,9 @@
   <!-- Datatables -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+  <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> -->
 
   <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

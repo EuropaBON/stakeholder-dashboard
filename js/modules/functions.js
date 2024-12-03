@@ -5,7 +5,7 @@ export const cy = cytoscape({
     container: document.getElementById('europabon-network')
     });
 export const groups = [10000, 10001, 10002, 10003, 10004, 10005];
-export const TOTAL_EVENTS = '13';
+export const TOTAL_EVENTS = '17';
 export const NO_DATA = 'N.A.';
 
 // export const scatter_data_degree = [];

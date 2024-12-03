@@ -1,9 +1,9 @@
 /*****************************************************************************
- * FILE:      Network Analysis EuropaBON
+ * FILE:      EuropaBON Stakeholder Dashboard
  * DATE:      October 2023
  * AUTHOR:    Christian Langer (christian.langer@idiv.de)
  * COPYRIGHT: (c) Christian Langer 2023
- * LICENSE:   CC BY 2.0 
+ * LICENSE:   GNU General Public License v3.0
  *****************************************************************************/
 
 import * as Utils from './modules/functions.js';
@@ -100,6 +100,19 @@ let projects_data = [];
   $('[data-toggle="popover"]').popover();
 
 /*****************************************************************************
+ *                      TOGGLE COLLAPSE
+ *****************************************************************************/
+
+  $('#readMoreButton').click(function() {
+    $(this).toggleClass( "active" );
+    if ($(this).hasClass("active")) {
+      $(this).text("Read less...");
+    } else {
+      $(this).text("Read more...");
+    }
+  });
+
+/*****************************************************************************
  *                      Mutation Observer
  *****************************************************************************/
 
@@ -123,7 +136,7 @@ const callback = function(mutationsList, observer) {
         // Function to fetch countries for a region from the REST Countries API
         async function fetchCountriesForRegion(regionName) {
           try {
-            const response = await fetch(`https://europabon.org/members/network-analysis/api/regions/${regionName}`);
+            const response = await fetch(`https://europabon.org/dashboard/api/regions/${regionName}`);
             const data = await response.json();
             const countries = data.join(', ');
             return countries;
@@ -169,8 +182,8 @@ observer.observe(targetNode, config);
 
 async function getData() {
     const response = await fetch(
-      `https://europabon.org/members/network-analysis/api/nodes`
-      //`http://localhost:8080/europabon.org/network-analysis/api/nodes`
+      `https://europabon.org/dashboard/api/nodes`
+      //`http://localhost:8080/europabon.org/dashboard/api/nodes`
       )
     return response.json();
 }
@@ -415,10 +428,9 @@ projects_data.forEach(([from, to, count]) => {
   project_object[from] = (project_object[from] || 0) + count;
   project_object[to] = (project_object[to] || 0) + count;
 });
-console.log(project_object);
 
 // fetch projects from API
-fetch('https://europabon.org/members/network-analysis/api/projects')
+fetch('https://europabon.org/dashboard/api/projects')
   .then(response => response.json())
   .then(apiData => {
     // Iterate through the API data and count the categories only if the title is present in project_object
@@ -435,7 +447,7 @@ fetch('https://europabon.org/members/network-analysis/api/projects')
     });
     const category_object_sorted = Utils.sortObject(category_object);
     Utils.topRanking(category_object_sorted,'topCategories');
-    console.log(category_object_sorted);
+    //console.log(category_object_sorted);
     
   })
   .catch(error => {
