@@ -341,7 +341,6 @@ export function chartData(data) {
         return [temp, line, r, tempCentrality];
     };
 
-
     const groupTypes = {
         occupation: [
             {
